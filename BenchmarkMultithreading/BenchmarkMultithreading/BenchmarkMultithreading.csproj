@@ -45,7 +45,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Benchmarks.cs" />
+    <Compile Include="BenchmarkContainer.cs" />
     <Compile Include="Benchmarks\Lock.cs" />
     <Compile Include="Benchmarks\MonitorEnter.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

@@ -7,7 +7,7 @@ using BenchmarkDotNet.Attributes;
 
 namespace BenchmarkMultithreading
 {
-  public class Benchmarks
+  public class BenchmarkContainer
   {
     #region public methods
     [Setup]

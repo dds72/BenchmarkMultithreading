@@ -8,5 +8,6 @@ namespace BenchmarkMultithreading.Benchmarks
 {
   class MonitorEnter
   {
+
   }
 }
