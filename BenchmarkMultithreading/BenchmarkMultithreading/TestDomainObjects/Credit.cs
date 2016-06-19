@@ -9,7 +9,7 @@ namespace BenchmarkMultithreading.TestDomainObjects
   internal class Credit
   {
     public int Amount { get; set; }
-    public byte Security { get; set; }
+    public short Security { get; set; }
     public List<Client> clients { get; set; } = new List<Client>();
   }
 }
