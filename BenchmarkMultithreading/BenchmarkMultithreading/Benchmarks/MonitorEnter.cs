@@ -1,14 +1,9 @@
 ﻿using BenchmarkMultithreading.TestDomainObjects;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading;
-using System.Threading.Tasks;
 
 namespace BenchmarkMultithreading.Benchmarks
 {
-  class MonitorEnter : IBenchmarkable
+    class MonitorEnter : IBenchmarkable
   {
     #region private fields
     private Credit credits;

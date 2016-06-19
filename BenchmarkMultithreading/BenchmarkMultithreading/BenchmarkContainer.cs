@@ -1,13 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using BenchmarkDotNet.Attributes;
+﻿using BenchmarkDotNet.Attributes;
 
 namespace BenchmarkMultithreading
 {
-  public class BenchmarkContainer
+    public class BenchmarkContainer
   {
     #region public methods
     [Setup]
@@ -24,6 +19,11 @@ namespace BenchmarkMultithreading
 
     [Benchmark]
     public void MonitorEnter()
+    {
+
+    }
+    [Benchmark]
+    public void ComparsionCollection()
     {
 
     }
