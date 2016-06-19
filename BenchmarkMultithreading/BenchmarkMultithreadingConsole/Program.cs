@@ -10,6 +10,23 @@ namespace BenchmarkMultithreadingConsole
   {
     static void Main(string[] args)
     {
+      foreach (var arg in args)
+      {
+        switch (arg)
+        {
+          case "run":
+          {
+
+            break;
+          }
+
+          case "pause":
+          {
+
+            break;
+          }
+        }
+      }
     }
   }
 }
