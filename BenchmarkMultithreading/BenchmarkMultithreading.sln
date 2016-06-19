@@ -4,6 +4,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 VisualStudioVersion = 14.0.25123.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BenchmarkMultithreadingConsole", "BenchmarkMultithreadingConsole\BenchmarkMultithreadingConsole.csproj", "{2706D524-D2D2-411B-86C3-07EBAAF97E93}"
+	ProjectSection(ProjectDependencies) = postProject
+		{9F098A77-241D-4E01-9B3D-29FE857E1511} = {9F098A77-241D-4E01-9B3D-29FE857E1511}
+	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BenchmarkMultithreading", "BenchmarkMultithreading\BenchmarkMultithreading.csproj", "{9F098A77-241D-4E01-9B3D-29FE857E1511}"
 EndProject
