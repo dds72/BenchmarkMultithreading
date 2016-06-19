@@ -33,6 +33,11 @@ namespace BenchmarkMultithreadingConsole
 
     static void Main(string[] args)
     {
+    
+    }
+
+    public static void start()
+    {
         fillSources();
         Console.WriteLine("Number of elements at collection: {0}", unsafeSource.Count);
 
@@ -45,7 +50,7 @@ namespace BenchmarkMultithreadingConsole
             threadsConcurrent[i].Start();
         }
 
-        Console.ReadKey();       
+        //Console.ReadKey();
     }
 
     public static void changeSourceWithLock()
