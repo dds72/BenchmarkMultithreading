@@ -6,8 +6,18 @@ using System.Threading.Tasks;
 
 namespace BenchmarkMultithreading.Benchmarks
 {
-  class Lock
+  class Lock : IBenchmarkable
   {
+    #region IBenchmarkable
+    public void Run()
+    {
+      throw new NotImplementedException();
+    }
 
+    public void Setup()
+    {
+      throw new NotImplementedException();
+    }
+    #endregion
   }
 }
