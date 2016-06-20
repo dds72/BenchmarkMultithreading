@@ -1,4 +1,5 @@
 ﻿using BenchmarkDotNet.Attributes;
+using BenchmarkMultithreading.Benchmarks;
 
 namespace BenchmarkMultithreading
 {
@@ -23,10 +24,17 @@ namespace BenchmarkMultithreading
 
     }
     [Benchmark]
-    public void ComparsionCollection()
+    public void ComparsionCollectionList()
     {
-
+        var testObj = new ComparsionCollectionList();
+        testObj.Run();
     }
-    #endregion
-  }
+    [Benchmark]
+    public void ComparsionCollectionConcurrent()
+    {
+        var testObj = new ComparsionCollectionConcurrent();
+        testObj.Run();
+    }
+        #endregion
+    }
 }
