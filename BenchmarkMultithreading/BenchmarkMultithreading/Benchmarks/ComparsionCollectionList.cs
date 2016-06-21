@@ -12,11 +12,11 @@ namespace BenchmarkMultithreading.Benchmarks
         const int THREADS_NUMBER = 10;
         const int INIT_ROWS_NUMBER = 10000;
 
-        private List<string> unsafeSource;
-        private object SyncRoot;
-        private ulong changesSum;
+        private List<string> unsafeSource = new List<string>();
+        private object SyncRoot = new object();
+        private ulong changesSum = 0;
 
-        Thread[] threadsLock;
+        Thread[] threadsLock = new Thread[THREADS_NUMBER];
         #endregion
 
         public void changeSource()
@@ -52,7 +52,7 @@ namespace BenchmarkMultithreading.Benchmarks
 
         public void Run()
         {
-            Setup();
+            threadsInit();
             fillSource();
             //Console.WriteLine("Number of elements at collection: {0}", unsafeSource.Count);
 
@@ -65,13 +65,6 @@ namespace BenchmarkMultithreading.Benchmarks
 
         public void Setup()
         {
-            unsafeSource = new List<string>();
-            SyncRoot = new object();
-            changesSum = 0;
-
-            threadsLock = new Thread[THREADS_NUMBER];
-
-            threadsInit();
         }
     }
 }

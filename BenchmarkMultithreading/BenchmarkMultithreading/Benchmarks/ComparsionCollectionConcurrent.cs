@@ -11,10 +11,10 @@ namespace BenchmarkMultithreading.Benchmarks
         const int THREADS_NUMBER = 10;
         const int INIT_ROWS_NUMBER = 10000;
 
-        private ConcurrentBag<string> safeSource;
-        private ulong changesSumConcurrent;
+        private ConcurrentBag<string> safeSource = new ConcurrentBag<string>();
+        private ulong changesSumConcurrent = 0;
 
-        Thread[] threadsConcurrent;
+        Thread[] threadsConcurrent = new Thread[THREADS_NUMBER];
         #endregion
 
         public void changeSource()
@@ -47,7 +47,7 @@ namespace BenchmarkMultithreading.Benchmarks
 
         public void Run()
         {
-            Setup();
+            threadsInit();
             fillSource();
             //Console.WriteLine("Number of elements at collection: {0}", safeSource.Count);
 
@@ -60,12 +60,6 @@ namespace BenchmarkMultithreading.Benchmarks
 
         public void Setup()
         {
-            safeSource = new ConcurrentBag<string>();
-            changesSumConcurrent = 0;
-
-            threadsConcurrent = new Thread[THREADS_NUMBER];
-
-            threadsInit();
         }
     }
 }
