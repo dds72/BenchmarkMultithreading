@@ -5,11 +5,17 @@ namespace BenchmarkMultithreading
 {
     public class BenchmarkContainer
   {
+    #region [.private fields]
+    private ComparsionCollectionList testList;
+    private ComparsionCollectionConcurrent testConcurrent;
+    #endregion
+
     #region public methods
     [Setup]
     public void Setup()
     {
-
+        testList = new ComparsionCollectionList();
+        testConcurrent = new ComparsionCollectionConcurrent();
     }
 
     [Benchmark]
@@ -26,15 +32,13 @@ namespace BenchmarkMultithreading
     [Benchmark]
     public void ComparsionCollectionList()
     {
-        var testObj = new ComparsionCollectionList();
-        testObj.Run();
+        testList.Run();
     }
     [Benchmark]
     public void ComparsionCollectionConcurrent()
     {
-        var testObj = new ComparsionCollectionConcurrent();
-        testObj.Run();
+        testConcurrent.Run();
     }
-        #endregion
+    #endregion
     }
 }

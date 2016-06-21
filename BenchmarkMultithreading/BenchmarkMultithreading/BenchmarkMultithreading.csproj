@@ -51,6 +51,7 @@
     <Compile Include="IBenchmarkable.cs" />
     <Compile Include="Benchmarks\Lock.cs" />
     <Compile Include="Benchmarks\MonitorEnter.cs" />
+    <Compile Include="IComparsion.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TestDomainObjects\Client.cs" />
     <Compile Include="TestDomainObjects\Credit.cs" />

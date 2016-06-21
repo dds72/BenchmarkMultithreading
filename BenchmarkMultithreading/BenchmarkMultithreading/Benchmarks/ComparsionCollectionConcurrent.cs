@@ -4,7 +4,7 @@ using System.Threading;
 
 namespace BenchmarkMultithreading.Benchmarks
 {
-    class ComparsionCollectionConcurrent : IBenchmarkable
+    class ComparsionCollectionConcurrent : IBenchmarkable, IComparsion
     {
         #region [.inits]
         const int NEW_ROWS_NUMBER = 5000;
@@ -17,7 +17,7 @@ namespace BenchmarkMultithreading.Benchmarks
         Thread[] threadsConcurrent;
         #endregion
 
-        private void changeSource()
+        public void changeSource()
         {
             for (int i = 0; i < NEW_ROWS_NUMBER; i++)
             {
@@ -26,7 +26,7 @@ namespace BenchmarkMultithreading.Benchmarks
             }
         }
 
-        private void threadsInit()
+        public void threadsInit()
         {
             for (int i = 0; i < THREADS_NUMBER; i++)
             {
@@ -36,7 +36,7 @@ namespace BenchmarkMultithreading.Benchmarks
             }
         }
 
-        private void fillSources()
+        public void fillSource()
         {
             for (int i = 0; i < INIT_ROWS_NUMBER; i++)
             {
@@ -48,8 +48,8 @@ namespace BenchmarkMultithreading.Benchmarks
         public void Run()
         {
             Setup();
-            fillSources();
-            Console.WriteLine("Number of elements at collection: {0}", safeSource.Count);
+            fillSource();
+            //Console.WriteLine("Number of elements at collection: {0}", safeSource.Count);
 
             //start threads
             for (int i = 0; i < THREADS_NUMBER; i++)
