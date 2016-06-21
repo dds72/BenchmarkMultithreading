@@ -46,7 +46,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BenchmarkContainer.cs" />
-    <Compile Include="Benchmarks\ComparsionCollection.cs" />
+    <Compile Include="Benchmarks\ComparsionCollectionList.cs" />
+    <Compile Include="Benchmarks\ComparsionCollectionConcurrent.cs" />
     <Compile Include="IBenchmarkable.cs" />
     <Compile Include="Benchmarks\Lock.cs" />
     <Compile Include="Benchmarks\MonitorEnter.cs" />
