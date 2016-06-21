@@ -10,9 +10,9 @@ using BenchmarkMultithreading;
 
 namespace BenchmarkMultithreadingConsole
 {
-  class Program
+  internal class Program
   {
-    static void Main(string[] args)
+    private static void Main(string[] args)
     {
       foreach (var arg in args)
       {
@@ -28,6 +28,11 @@ namespace BenchmarkMultithreadingConsole
           {
             Console.WriteLine("Press ENTER to release console.");
             Console.ReadKey();
+            break;
+          }
+
+          default:
+          {
             break;
           }
         }
