@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Threading;
 
 namespace BenchmarkMultithreading.Benchmarks
@@ -9,14 +8,20 @@ namespace BenchmarkMultithreading.Benchmarks
 
         #region [.inits]
         const int NEW_ROWS_NUMBER = 5000;
-        const int THREADS_NUMBER = 10;
         const int INIT_ROWS_NUMBER = 10000;
 
         private List<string> unsafeSource = new List<string>();
         private object SyncRoot = new object();
         private ulong changesSum = 0;
+        private readonly int threadsCount;
 
-        Thread[] threadsLock = new Thread[THREADS_NUMBER];
+        Thread[] threadsLock;
+
+        public ComparsionCollectionList(int ThreadsCount)
+        {
+            this.threadsCount = ThreadsCount;
+            threadsLock = new Thread[threadsCount];
+        }
         #endregion
 
         public void changeSource()
@@ -33,7 +38,7 @@ namespace BenchmarkMultithreading.Benchmarks
 
         public void threadsInit()
         {
-            for (int i = 0; i < THREADS_NUMBER; i++)
+            for (int i = 0; i < threadsCount; i++)
             {
                 ThreadStart t1s = new ThreadStart(changeSource);
                 Thread t1 = new Thread(t1s);
@@ -57,14 +62,10 @@ namespace BenchmarkMultithreading.Benchmarks
             //Console.WriteLine("Number of elements at collection: {0}", unsafeSource.Count);
 
             //start threads
-            for (int i = 0; i < THREADS_NUMBER; i++)
+            for (int i = 0; i < threadsCount; i++)
             {
                 threadsLock[i].Start();
             }
-        }
-
-        public void Setup()
-        {
         }
     }
 }
