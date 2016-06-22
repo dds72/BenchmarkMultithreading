@@ -1,8 +1,3 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using BenchmarkDotNet.Attributes;
 using BenchmarkMultithreading.Benchmarks;
 
@@ -20,6 +15,8 @@ namespace BenchmarkMultithreading
 	#region [.public properties]
     public int ThreadsCount => 4;
     public int WritesCount => 10;
+
+    public int CollectionThreadsCount => 10;
 	#endregion
 	
     #region [.public methods]
@@ -28,8 +25,8 @@ namespace BenchmarkMultithreading
     {
       monitorEnter = new MonitorEnter(ThreadsCount, WritesCount);
       lockBench = new Lock(ThreadsCount, WritesCount);
-      testList = new ComparsionCollectionList();
-      testConcurrent = new ComparsionCollectionConcurrent();
+      testList = new ComparsionCollectionList(CollectionThreadsCount);
+      testConcurrent = new ComparsionCollectionConcurrent(CollectionThreadsCount);
     }
 
     [Benchmark]

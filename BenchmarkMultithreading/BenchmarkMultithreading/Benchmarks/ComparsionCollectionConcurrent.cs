@@ -8,13 +8,20 @@ namespace BenchmarkMultithreading.Benchmarks
     {
         #region [.inits]
         const int NEW_ROWS_NUMBER = 5000;
-        const int THREADS_NUMBER = 10;
         const int INIT_ROWS_NUMBER = 10000;
 
         private ConcurrentBag<string> safeSource = new ConcurrentBag<string>();
         private ulong changesSumConcurrent = 0;
+        private readonly int threadsCount;
 
-        Thread[] threadsConcurrent = new Thread[THREADS_NUMBER];
+        Thread[] threadsConcurrent;
+
+        public ComparsionCollectionConcurrent(int ThreadsCount)
+        {
+            this.threadsCount = ThreadsCount;
+            threadsConcurrent = new Thread[threadsCount];
+
+        }
         #endregion
 
         public void changeSource()
@@ -28,7 +35,7 @@ namespace BenchmarkMultithreading.Benchmarks
 
         public void threadsInit()
         {
-            for (int i = 0; i < THREADS_NUMBER; i++)
+            for (int i = 0; i < threadsCount; i++)
             {
                 ThreadStart t2s = new ThreadStart(changeSource);
                 Thread t2 = new Thread(t2s);
@@ -52,14 +59,10 @@ namespace BenchmarkMultithreading.Benchmarks
             //Console.WriteLine("Number of elements at collection: {0}", safeSource.Count);
 
             //start threads
-            for (int i = 0; i < THREADS_NUMBER; i++)
+            for (int i = 0; i < threadsCount; i++)
             {
                 threadsConcurrent[i].Start();
             }
-        }
-
-        public void Setup()
-        {
         }
     }
 }
