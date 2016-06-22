@@ -14,7 +14,10 @@ namespace BenchmarkMultithreading.Benchmarks
 
     private Thread[] threadsLock;
 
-    public ComparsionCollectionList(int ThreadsCount, int NewRowsCount = 5000, int InitRowsCount = 10000)
+    public ComparsionCollectionList(
+      int ThreadsCount,
+      int NewRowsCount = 5000,
+      int InitRowsCount = 10000)
     {
       this.threadsCount = ThreadsCount;
       this.newRowsCount = NewRowsCount;

@@ -13,41 +13,46 @@ namespace BenchmarkMultithreading.Benchmarks
 
     private Thread[] threadsConcurrent;
 
-    public ComparsionCollectionConcurrent(int ThreadsCount, int NewRowsCount = 5000, int InitRowsCount = 10000)
+    public ComparsionCollectionConcurrent(
+      int ThreadsCount,
+      int NewRowsCount = 5000,
+      int InitRowsCount = 10000)
     {
-        this.threadsCount = ThreadsCount;
-        this.newRowsCount = NewRowsCount;
-        this.initRowsCount = InitRowsCount;
-        this.threadsConcurrent = new Thread[threadsCount];
+      this.threadsCount = ThreadsCount;
+      this.newRowsCount = NewRowsCount;
+      this.initRowsCount = InitRowsCount;
+      this.threadsConcurrent = new Thread[threadsCount];
 
-        threadsInit();
-        fillSource();
+      threadsInit();
+      fillSource();
     }
     #endregion
 
     public void changeSource()
     {
-        for (int i = 0; i < newRowsCount; i++)
-        {
-            safeSource.Add("new value");
-        }
+      for (int i = 0; i < newRowsCount; i++)
+      {
+        safeSource.Add("new value");
+      }
     }
 
     public void threadsInit()
     {
-        for (int i = 0; i < threadsCount; i++)
-        {
-            threadsConcurrent[i] = new Thread(new ThreadStart(changeSource));
-        }
+      for (int i = 0; i < threadsCount; i++)
+      {
+        threadsConcurrent[i] =
+          new Thread(
+            new ThreadStart(changeSource));
+      }
     }
 
     public void fillSource()
     {
-        for (int i = 0; i < initRowsCount; i++)
-        {
-            var str = "default";
-            safeSource.Add(str);
-        }
+      for (int i = 0; i < initRowsCount; i++)
+      {
+          var str = "default";
+          safeSource.Add(str);
+      }
     }
 
     public void Run()
