@@ -29,13 +29,13 @@ namespace BenchmarkMultithreading
       testConcurrent = new ComparsionCollectionConcurrent(CollectionThreadsCount);
     }
 
-    [Benchmark]
+//    [Benchmark]
     public void Lock()
     {
       lockBench.Run();
     }
 
-    [Benchmark]
+//    [Benchmark]
     public void MonitorEnter()
     {
       monitorEnter.Run();
