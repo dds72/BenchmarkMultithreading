@@ -6,6 +6,6 @@ namespace BenchmarkMultithreading
     {
         void fillSource();
         void changeSource();
-        void threadsInit(int count);
+        void threadsInit();
     }
 }

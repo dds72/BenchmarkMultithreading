@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Concurrent;
+﻿using System.Collections.Concurrent;
 using System.Threading;
 
 namespace BenchmarkMultithreading.Benchmarks
@@ -7,50 +6,48 @@ namespace BenchmarkMultithreading.Benchmarks
   class ComparsionCollectionConcurrent : IBenchmarkable, IComparsion
   {
     #region [.inits]
-    const int NEW_ROWS_NUMBER = 5000;
-    const int INIT_ROWS_NUMBER = 10000;
-
-    private readonly ConcurrentBag<string> safeSource = new ConcurrentBag<string>();
-    private ulong changesSumConcurrent = 0;
+    private ConcurrentBag<string> safeSource = new ConcurrentBag<string>();
     private readonly int threadsCount;
+    private readonly int newRowsCount;
+    private readonly int initRowsCount;
 
     private Thread[] threadsConcurrent;
 
-    public ComparsionCollectionConcurrent(int threadsCount)
+    public ComparsionCollectionConcurrent(int ThreadsCount, int NewRowsCount = 5000, int InitRowsCount = 10000)
     {
-      this.threadsCount = threadsCount;
-      threadsConcurrent = new Thread[threadsCount];
-      threadsInit(threadsCount);
-      fillSource();
-      //Console.WriteLine("Number of elements at collection: {0}", safeSource.Count);
+        this.threadsCount = ThreadsCount;
+        this.newRowsCount = NewRowsCount;
+        this.initRowsCount = InitRowsCount;
+        this.threadsConcurrent = new Thread[threadsCount];
+
+        threadsInit();
+        fillSource();
     }
     #endregion
 
     public void changeSource()
     {
-      for (int i = 0; i < NEW_ROWS_NUMBER; i++)
-      {
-        safeSource.Add("new value");
-        changesSumConcurrent++;
-      }
+        for (int i = 0; i < newRowsCount; i++)
+        {
+            safeSource.Add("new value");
+        }
     }
 
-    public void threadsInit(int count)
+    public void threadsInit()
     {
-      threadsConcurrent = new Thread[count];
-      for (int i = 0; i < count; i++)
-      {
-        threadsConcurrent[i] = new Thread(new ThreadStart(changeSource));
-      }
+        for (int i = 0; i < threadsCount; i++)
+        {
+            threadsConcurrent[i] = new Thread(new ThreadStart(changeSource));
+        }
     }
 
     public void fillSource()
     {
-      for (int i = 0; i < INIT_ROWS_NUMBER; i++)
-      {
-        var str = "default" + i;
-        safeSource.Add(str);
-      }
+        for (int i = 0; i < initRowsCount; i++)
+        {
+            var str = "default";
+            safeSource.Add(str);
+        }
     }
 
     public void Run()

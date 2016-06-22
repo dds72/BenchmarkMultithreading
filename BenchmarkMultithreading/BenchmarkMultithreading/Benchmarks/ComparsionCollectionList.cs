@@ -5,59 +5,57 @@ namespace BenchmarkMultithreading.Benchmarks
 {
   class ComparsionCollectionList : IBenchmarkable, IComparsion
   {
-
     #region [.inits]
-    const int NEW_ROWS_NUMBER = 5000;
-    const int INIT_ROWS_NUMBER = 10000;
-
     private List<string> unsafeSource = new List<string>();
     private object SyncRoot = new object();
-    private ulong changesSum = 0;
+    private readonly int threadsCount;
+    private readonly int newRowsCount;
+    private readonly int initRowsCount;
 
-    Thread[] threadsLock;
+    private Thread[] threadsLock;
 
-    public ComparsionCollectionList(int threadsCount)
+    public ComparsionCollectionList(int ThreadsCount, int NewRowsCount = 5000, int InitRowsCount = 10000)
     {
-      threadsInit(threadsCount);
+      this.threadsCount = ThreadsCount;
+      this.newRowsCount = NewRowsCount;
+      this.initRowsCount = InitRowsCount;
+      this.threadsLock = new Thread[threadsCount];
+
+      threadsInit();
       fillSource();
     }
     #endregion
 
-    public void changeSource()
+    public void threadsInit()
     {
-      for (int i = 0; i < NEW_ROWS_NUMBER; i++)
-      {
-        lock (SyncRoot)
-        {
-          unsafeSource.Add("new value");
-          changesSum++;
-        }
-      }
-    }
-
-    public void threadsInit(int count)
-    {
-      threadsLock = new Thread[count];
-      for (int i = 0; i < count; i++)
+      for (int i = 0; i < threadsCount; i++)
       {
         threadsLock[i] = new Thread(new ThreadStart(changeSource));
       }
     }
 
+    public void changeSource()
+    {
+      for (int i = 0; i < newRowsCount; i++)
+      {
+        lock (SyncRoot)
+        {
+          unsafeSource.Add("new value");
+        }
+      }
+    }
+
     public void fillSource()
     {
-      for (int i = 0; i < INIT_ROWS_NUMBER; i++)
+      for (int i = 0; i < initRowsCount; i++)
       {
-        var str = "default" + i;
+        var str = "default";
         unsafeSource.Add(str);
       }
     }
 
     public void Run()
     {
-      //Console.WriteLine("Number of elements at collection: {0}", unsafeSource.Count);
-
-      //start threads
       for (int i = 0; i < threadsCount; i++)
       {
         threadsLock[i].Start();
