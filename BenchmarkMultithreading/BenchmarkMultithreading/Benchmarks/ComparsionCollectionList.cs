@@ -7,31 +7,33 @@ namespace BenchmarkMultithreading.Benchmarks
     {
 
         #region [.inits]
-        const int NEW_ROWS_NUMBER = 5000;
-        const int INIT_ROWS_NUMBER = 10000;
-
         private List<string> unsafeSource = new List<string>();
         private object SyncRoot = new object();
-        private ulong changesSum = 0;
         private readonly int threadsCount;
+        private readonly int newRowsCount;
+        private readonly int initRowsCount;
 
-        Thread[] threadsLock;
+        private Thread[] threadsLock;
 
-        public ComparsionCollectionList(int ThreadsCount)
+        public ComparsionCollectionList(int ThreadsCount, int NewRowsCount = 5000, int InitRowsCount = 10000)
         {
             this.threadsCount = ThreadsCount;
-            threadsLock = new Thread[threadsCount];
+            this.newRowsCount = NewRowsCount;
+            this.initRowsCount = InitRowsCount;
+            this.threadsLock = new Thread[threadsCount];
+
+            threadsInit();
+            fillSource();
         }
         #endregion
 
         public void changeSource()
         {
-            for (int i = 0; i < NEW_ROWS_NUMBER; i++)
+            for (int i = 0; i < newRowsCount; i++)
             {
                 lock (SyncRoot)
                 {
                     unsafeSource.Add("new value");
-                    changesSum++;
                 }
             }
         }
@@ -48,19 +50,15 @@ namespace BenchmarkMultithreading.Benchmarks
 
         public void fillSource()
         {
-            for (int i = 0; i < INIT_ROWS_NUMBER; i++)
+            for (int i = 0; i < initRowsCount; i++)
             {
-                var str = "default" + i;
+                var str = "default";
                 unsafeSource.Add(str);
             }
         }
 
         public void Run()
         {
-            threadsInit();
-            fillSource();
-            //Console.WriteLine("Number of elements at collection: {0}", unsafeSource.Count);
-
             //start threads
             for (int i = 0; i < threadsCount; i++)
             {
